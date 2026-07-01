@@ -42,7 +42,7 @@ export default function FilePuzzle({
 
   // Bit flipper state (Lights out variant: flipping i flips i-1, i, i+1)
   const [bits, setBits] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
-  const TARGET_VALUE = 173; // Hex: 0xAD, Binary: 10101101
+  const TARGET_VALUE = 172; // Hex: 0xAC, Binary: 10101100
   const [currentVal, setCurrentVal] = useState(0);
 
   // File tree nodes hierarchy
