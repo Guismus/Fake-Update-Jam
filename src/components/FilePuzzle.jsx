@@ -16,7 +16,7 @@ const INITIAL_WIRE_GRID = [
   { r: 1, c: 3, type: 'straight', rot: 90 },
   
   { r: 2, c: 0, type: 'bend', rot: 270 },
-  { r: 2, c: 1, type: 'straight', rot: 0 },
+  { r: 2, c: 1, type: 'bend', rot: 0 },
   { r: 2, c: 2, type: 'bend', rot: 90 },
   { r: 2, c: 3, type: 'bend', rot: 0 },
   
