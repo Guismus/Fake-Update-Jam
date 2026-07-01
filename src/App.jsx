@@ -105,7 +105,8 @@ export default function App() {
     const interval = setInterval(() => {
       if (index < BOOT_SEQUENCE.length) {
         audio.playClick();
-        setBootLines(prev => [...prev, BOOT_SEQUENCE[index]]);
+        const line = BOOT_SEQUENCE[index];
+        setBootLines(prev => [...prev, line]);
         index++;
       } else {
         clearInterval(interval);
