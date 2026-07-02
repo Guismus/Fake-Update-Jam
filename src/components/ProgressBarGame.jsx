@@ -21,6 +21,23 @@ export default function ProgressBarGame({
   // Keyboard references
   const keys = useRef({});
 
+  // Refs for props to prevent game loop resets
+  const progressRef = useRef(progress);
+  const onProgressTickRef = useRef(onProgressTick);
+  const setGlitchLevelRef = useRef(setGlitchLevel);
+
+  useEffect(() => {
+    progressRef.current = progress;
+  }, [progress]);
+
+  useEffect(() => {
+    onProgressTickRef.current = onProgressTick;
+  }, [onProgressTick]);
+
+  useEffect(() => {
+    setGlitchLevelRef.current = setGlitchLevel;
+  }, [setGlitchLevel]);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -123,7 +140,7 @@ export default function ProgressBarGame({
       if (!gameActive) return;
 
       // 1. Inverted controls check
-      const currentGlitch = (progress - 99.97) / 0.02; // 0 to 1 as we approach 99.99
+      const currentGlitch = (progressRef.current - 99.97) / 0.02; // 0 to 1 as we approach 99.99
       const isInverted = currentGlitch > 0.5;
       setKeysInverted(isInverted);
       
@@ -264,7 +281,7 @@ export default function ProgressBarGame({
 
           // Add Progress tick
           const increment = 0.004; // Each coin gives 0.004%
-          onProgressTick(increment);
+          onProgressTickRef.current(increment);
           
           // Re-spawn a new collectible in a random safe location
           setTimeout(() => {
@@ -299,11 +316,11 @@ export default function ProgressBarGame({
       spawnParticles(player.x + player.width/2, player.y + player.height/2, '#ff0055', 20);
       
       // Lose some progress penalty (but clamp so we don't go below entry point 99.970%)
-      onProgressTick(-0.002);
+      onProgressTickRef.current(-0.002);
       
       // Camera tremor trigger via parent
-      setGlitchLevel(true);
-      setTimeout(() => setGlitchLevel(false), 200);
+      setGlitchLevelRef.current(true);
+      setTimeout(() => setGlitchLevelRef.current(false), 200);
 
       respawnPlayer();
       player.hitFlash = 15; // flash player red
@@ -436,7 +453,7 @@ export default function ProgressBarGame({
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [progress, onProgressTick, setGlitchLevel]);
+  }, []);
 
   // Monitor progress to trigger the exit collapse
   useEffect(() => {
