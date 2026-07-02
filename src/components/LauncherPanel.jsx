@@ -9,7 +9,8 @@ export default function LauncherPanel({
   onStartRepair,
   onLaunchDebugger,
   addLog,
-  setTab
+  setTab,
+  onLaunchGame
 }) {
   const canvasRef = useRef(null);
   const [speedHistory, setSpeedHistory] = useState(Array(30).fill(0));
@@ -123,7 +124,7 @@ export default function LauncherPanel({
   const handleActionButton = () => {
     if (progress >= 100) {
       audio.playSuccess();
-      alert("SUCCESS: Starting 'Chronos Shift'... Wait, are you ready to enter the simulation?");
+      if (onLaunchGame) onLaunchGame();
       return;
     }
     

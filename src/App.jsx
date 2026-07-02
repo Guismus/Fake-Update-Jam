@@ -5,6 +5,7 @@ import FilePuzzle from './components/FilePuzzle';
 import SettingsPanel from './components/SettingsPanel';
 import ProgressBarGame from './components/ProgressBarGame';
 import PhysicsUI from './components/PhysicsUI';
+import SimulationUI from './components/SimulationUI';
 
 const DEFAULT_LOGS = [
   { text: '[INFO] Launching Chronos Shift updater system...', type: 'info' },
@@ -240,8 +241,15 @@ export default function App() {
         />
       )}
 
+      {/* SIMULATION ENDING PHASE */}
+      {phase === 'simulation' && (
+        <SimulationUI 
+          onReset={handleResetProgress}
+        />
+      )}
+
       {/* NORMAL / GLITCHED / COMPLETED ACTIVE LAUNCHER LAYOUT */}
-      {phase !== 'boot' && phase !== 'physics' && (
+      {phase !== 'boot' && phase !== 'physics' && phase !== 'simulation' && (
         <>
           {/* Header Top Bar */}
           <div className="top-bar">
@@ -318,6 +326,7 @@ export default function App() {
                   onLaunchDebugger={handleLaunchDebugger}
                   addLog={addLog}
                   setTab={setTab}
+                  onLaunchGame={() => setPhase('simulation')}
                 />
               )}
 
@@ -380,6 +389,7 @@ export default function App() {
                   onClick={() => {
                     audio.playSelect();
                     setVictoryModal(false);
+                    setPhase('simulation');
                   }}
                 >
                   ENTER CHRONOS SHIFT
