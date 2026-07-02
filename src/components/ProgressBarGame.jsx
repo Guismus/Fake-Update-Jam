@@ -96,10 +96,10 @@ export default function ProgressBarGame({
 
     // Hazards (red glitch bytes sliding around)
     const hazards = [
-      { x: 150, y: 204, w: 16, h: 16, vx: 2, minX: 100, maxX: 300 },
-      { x: 450, y: 204, w: 16, h: 16, vx: -2, minX: 350, maxX: 650 },
-      { x: 220, y: 114, w: 12, h: 12, vx: 1.5, minX: 220, maxX: 300 },
-      { x: 490, y: 104, w: 14, h: 12, vx: 2.5, minX: 490, maxX: 610 }
+      { x: 150, y: 204, w: 16, h: 16, vx: 1, minX: 100, maxX: 300 },
+      { x: 450, y: 204, w: 16, h: 16, vx: -1, minX: 350, maxX: 650 },
+      { x: 220, y: 114, w: 12, h: 12, vx: 0.75, minX: 220, maxX: 300 },
+      { x: 490, y: 104, w: 14, h: 12, vx: 1.25, minX: 490, maxX: 610 }
     ];
 
     // Particle FX
